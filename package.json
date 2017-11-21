@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-nearley",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Wrapper around nearley js to allow for language creation / parsing in ember js",
   "keywords": [
     "ember-addon",
