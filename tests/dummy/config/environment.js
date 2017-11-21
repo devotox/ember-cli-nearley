@@ -45,7 +45,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.locationType = 'hash';
-    ENV.baseUrl = '/ember-cli-nearley/';
+    ENV.rootURL = '/ember-cli-nearley/';
     // here you can enable a production-specific feature
   }
 
