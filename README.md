@@ -14,6 +14,8 @@ Simple Wrapper around [Nearley](https://github.com/Hardmath123/nearley).
 This provides a service that can be used to parse source code and also automatically compiles
 the index.ne file in app/grammar/
 
+[DEMO](http://devotox.github.io/ember-cli-nearley)
+
 * Note this also includes [Moo](https://github.com/no-context/moo) for tokenizing if needed
 * To use tokens from a different file file must be called `tokens.js` within `app/grammar` directory
 * and in your index.ne you must do this below. grammar-tokens is a shim created to allow you to import into your grammar.js file created from index.ne
@@ -30,8 +32,6 @@ the index.ne file in app/grammar/
 @lexer lexer
 
 ```
-
-[DEMO](http://devotox.github.io/ember-cli-nearley)
 
 ## Installation
 * `ember install ember-cli-nearley`
