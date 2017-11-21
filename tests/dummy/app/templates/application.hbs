@@ -1,3 +1,21 @@
-<h2 id="title">Welcome to Ember</h2>
+<h2>Simple Arithmetic Language</h2>
 
-{{outlet}}
+<p>Input 1</p>
+{{input value=input1}}
+
+<p>Input 2</p>
+{{input value=input2}}
+
+<p>Operator To use (+|-|*|/)</p>
+{{input value=operator}}
+
+<br/>
+<br/>
+
+<div>
+	{{#nearley-parse
+		value=(concat input1 operator input2)
+	as |computed|}}
+		Result: {{computed}}
+	{{/nearley-parse}}
+</div>
