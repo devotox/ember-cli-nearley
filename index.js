@@ -56,11 +56,11 @@ module.exports = {
 
 		this.import('vendor/shims/moo.js');
 		this.import('vendor/shims/nearley.js');
+
 		this.import('vendor/shims/grammar-tokens.js'); // must be before grammar
 		this.import('vendor/shims/grammar.js');
 
-		this.import('vendor/moo.js'); // change to below when fix comes out
-		// this.import('node_modules/moo/moo.js');
+		this.import('node_modules/moo/moo.js');
 		this.import('node_modules/nearley/lib/nearley.js');
 
 		const [sourceCreated, tokensCreated] = compileGrammar();
