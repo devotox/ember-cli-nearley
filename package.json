@@ -33,7 +33,7 @@
     "format": "find app addon config tests -name '*.js' -type f | xargs prettier --write | xargs eslint --fix"
   },
   "dependencies": {
-    "ember-cli-babel": "6.11.0",
+    "ember-cli-babel": "6.12.0",
     "ember-cli-htmlbars": "2.0.3",
     "moo": "^0.4.3",
     "nearley": "^2.11.0"
