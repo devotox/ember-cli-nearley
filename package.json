@@ -33,6 +33,13 @@
     "deploy": "ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\"; git push origin gh-pages; git checkout master",
     "format": "find app addon config tests -name '*.js' -type f | xargs prettier --write | xargs eslint --fix"
   },
+  "lint-staged": {
+    "*.{js,json,css}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "dependencies": {
     "ember-cli-babel": "^6.12.0",
     "ember-cli-htmlbars": "^2.0.3",
