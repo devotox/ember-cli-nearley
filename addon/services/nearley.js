@@ -1,15 +1,15 @@
-import Service from '@ember/service';
-
 import nearley from 'nearley';
 
 import grammar from 'grammar';
+
+import Service from '@ember/service';
 
 export default Service.extend({
 	compile(grammar) {
 		return nearley.Grammar.fromCompiled(grammar);
 	},
 
-	createParser(g=grammar) {
+	createParser(g = grammar) {
 		let compiled = this.compile(g);
 		return new nearley.Parser(compiled);
 	},

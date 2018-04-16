@@ -1,11 +1,10 @@
-/* eslint-env node */
 'use strict';
 
 const fs = require('fs');
-const nearley = require("nearley");
-const compile = require("nearley/lib/compile");
-const generate = require("nearley/lib/generate");
-const nearleyGrammar = require("nearley/lib/nearley-language-bootstrapped");
+const nearley = require('nearley');
+const compile = require('nearley/lib/compile');
+const generate = require('nearley/lib/generate');
+const nearleyGrammar = require('nearley/lib/nearley-language-bootstrapped');
 
 const compileGrammar = () => {
 	let ret = [false, false];
@@ -22,7 +21,7 @@ const compileGrammar = () => {
 		// Compile the AST into a set of rules
 		const grammarInfoObject = compile(grammarAst, {});
 		// Generate JavaScript code from the rules
-		const grammarJs = generate(grammarInfoObject, "grammar");
+		const grammarJs = generate(grammarInfoObject, 'grammar');
 
 		fs.writeFileSync('vendor/grammar.js', grammarJs);
 		ret[0] = true;
@@ -52,7 +51,6 @@ module.exports = {
 
 	included() {
 		this._super.included.apply(this, arguments);
-		this._ensureThisImport();
 
 		this.import('vendor/shims/moo.js');
 		this.import('vendor/shims/nearley.js');
@@ -63,28 +61,12 @@ module.exports = {
 		this.import('node_modules/moo/moo.js');
 		this.import('node_modules/nearley/lib/nearley.js');
 
-		const [sourceCreated, tokensCreated] = compileGrammar();
+		const compiled = compileGrammar();
+		const sourceCreated = compiled[0];
+		const tokensCreated = compiled[1];
 
 		if(tokensCreated) { this.import('vendor/grammar-tokens.js'); }
 		if(sourceCreated) { this.import('vendor/grammar.js'); }
 
-	},
-
-	_ensureThisImport() {
-		if (!this.import) {
-			this._findHost = function findHostShim() {
-				let current = this;
-				let app;
-
-				do {
-					app = current.app || app;
-				} while (current.parent.parent && (current = current.parent));
-				return app;
-			};
-			this.import = function importShim(asset, options) {
-				let app = this._findHost();
-				app.import(asset, options);
-			};
-		}
 	}
 };
