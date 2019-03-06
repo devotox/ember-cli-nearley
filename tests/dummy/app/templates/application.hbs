@@ -9,13 +9,13 @@
 <p>Operator To use (+|-|*|/)</p>
 {{input value=operator}}
 
-<br/>
-<br/>
+<br>
+<br>
 
 <div>
-	{{#nearley-parse
-		value=(concat input1 operator input2)
-	as |computed|}}
-		Result: {{computed}}
-	{{/nearley-parse}}
+  {{#nearley-parse
+    value=(concat input1 operator input2)
+  as |computed|}}
+    Result: {{computed}}
+  {{/nearley-parse}}
 </div>
