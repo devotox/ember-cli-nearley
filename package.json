@@ -10,11 +10,11 @@
   ],
   "license": "MIT",
   "author": "Devonte Emokpae",
+  "repository": "https://github.com/devotox/ember-cli-nearley",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "https://github.com/devotox/ember-cli-nearley",
   "scripts": {
     "test": "ember test",
     "lint:js": "eslint .",
