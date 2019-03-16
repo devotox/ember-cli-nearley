@@ -47,6 +47,11 @@ const compileGrammar = () => {
 	let grammarFile = 'app/grammar/index.ne';
 	let tokensFile = 'app/grammar/tokens.js';
 
+	console.log(''); // eslint-disable-line
+	console.log('[Nearley] Grammar File Found:', fs.existsSync(grammarFile)); // eslint-disable-line
+	console.log('[Nearley] Tokens File Found:', fs.existsSync(tokensFile)); // eslint-disable-line
+	console.log(''); // eslint-disable-line
+
 	if(fs.existsSync(grammarFile)) {
 		let sourceCode = fs.readFileSync(grammarFile, 'utf8');
 		// Parse the grammar source into an AST
