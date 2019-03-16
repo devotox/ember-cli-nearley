@@ -22,6 +22,7 @@ export default Service.extend({
 				&& parser.feed(source)
 				&& parser.results[0];
 		} catch(e) {
+			console.error('Nearley Parse Error', e); // eslint-disable-line
 			return '';
 		}
 	}

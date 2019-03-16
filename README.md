@@ -14,7 +14,7 @@ Simple Wrapper around [Nearley](https://github.com/Hardmath123/nearley).
 This provides a service that can be used to parse source code and also automatically compiles
 the index.ne file in app/grammar/
 
-[DEMO](http://devotox.github.io/ember-cli-nearley)
+[DEMO](https://devotox.github.io/ember-cli-nearley)
 
 Installation
 ------------------------------------------------------------------------------
