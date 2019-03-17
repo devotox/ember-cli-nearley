@@ -31,29 +31,35 @@ module.exports = {
 		this.import('node_modules/nearley/lib/nearley.js');
 
 		const compiled = compileGrammar();
-		const sourceCreated = compiled[0];
-		const tokensCreated = compiled[1];
+		const { sourceCreated, tokensCreated } = compiled
 
 		if(tokensCreated) { this.import('vendor/grammar-tokens.js'); }
 		if(sourceCreated) { this.import('vendor/grammar.js'); }
-
 	}
 };
 
 
 
 const compileGrammar = () => {
-	let ret = [false, false];
+	let sourceCreated = false;
+	let tokensCreated = false;
+
 	let grammarFile = 'app/grammar/index.ne';
 	let tokensFile = 'app/grammar/tokens.js';
+	let defaultGrammarFile = 'app/grammar/index.default.ne';
 
 	console.log(''); // eslint-disable-line
 	console.log('[Nearley] Grammar File Found:', fs.existsSync(grammarFile)); // eslint-disable-line
-	console.log('[Nearley] Tokens File Found:', fs.existsSync(tokensFile)); // eslint-disable-line
+	console.log('[Nearley] Tokens File Found:', fs.existsSync(tokensFile));   // eslint-disable-line
 	console.log(''); // eslint-disable-line
+
+	if(!fs.existsSync(grammarFile)) { 
+		grammarFile = defaultGrammarFile; 
+	}
 
 	if(fs.existsSync(grammarFile)) {
 		let sourceCode = fs.readFileSync(grammarFile, 'utf8');
+
 		// Parse the grammar source into an AST
 		const grammarParser = new nearley.Parser(nearleyGrammar);
 		grammarParser.feed(sourceCode);
@@ -61,11 +67,12 @@ const compileGrammar = () => {
 
 		// Compile the AST into a set of rules
 		const grammarInfoObject = compile(grammarAst, {});
+
 		// Generate JavaScript code from the rules
 		const grammarJs = generate(grammarInfoObject, 'grammar');
 
 		fs.writeFileSync('vendor/grammar.js', grammarJs);
-		ret[0] = true;
+		sourceCreated = true;
 	}
 
 	if(fs.existsSync(tokensFile)) {
@@ -73,8 +80,8 @@ const compileGrammar = () => {
 		tokensCode = tokensCode.replace('root.tokens', 'root[\'grammar-tokens\']');
 
 		fs.writeFileSync('vendor/grammar-tokens.js', tokensCode);
-		ret[1] = true;
+		tokensCreated = true;
 	}
 
-	return ret;
+	return { sourceCreated, tokensCreated };
 };

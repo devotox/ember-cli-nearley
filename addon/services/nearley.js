@@ -5,13 +5,23 @@ import grammar from 'grammar';
 import Service from '@ember/service';
 
 export default Service.extend({
-	compile(grammar) {
-		return nearley.Grammar.fromCompiled(grammar);
+	compile(g = grammar) {
+		try {
+			return nearley.Grammar.fromCompiled(g);
+		} catch(e) {
+			console.error('Nearley Compile Error', e); // eslint-disable-line
+			return '';
+		}
 	},
 
 	createParser(g = grammar) {
-		let compiled = this.compile(g);
-		return new nearley.Parser(compiled);
+		try {
+			let compiled = this.compile(g);
+			return new nearley.Parser(compiled);
+		} catch(e) {
+			console.error('Nearley Parser Create Error', e); // eslint-disable-line
+			return '';
+		}
 	},
 
 	parse(source, grammar) {
